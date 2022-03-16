@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect,useState } from "react";
+import { useDispatch } from "react-redux";
 import {Link} from "react-router-dom";
 import "./Movies.css"
 const genres = ["Comedy", "Thriller", "Drama", "Documentary", "Children"];
@@ -25,14 +26,27 @@ const genres = ["Comedy", "Thriller", "Drama", "Documentary", "Children"];
  }, []);
 
 
-//    filter by genre 
-// const handleFilter = (e)=>{
-//     // dispach filterby genre action to the store
-// }
+      //filter by genre 
+const handleFilter = (e)=>{
+    // dispach filterby genre action to the store
+    let filtered = data.filter((movie) => movie.genre == e.target.value);
+    console.log(filtered);
+    setData([...filtered]);
+}
   return (
     <>
+    
       <h2>Movies</h2>
+      <select  onChange={handleFilter} className="filter">
+        {/* map through the filter  */}
+        {
+          genres.map((genre)=>{
+            return <option value={genre}>{genre}</option>
+          })
+        }
+      </select> 
       <div className = "movies-list">
+        {/* map throught th movie list and display the results */}
       {loading && <h2>Loading.......</h2>}
         {!loading && data && data.map((item) =>{
           return <>
@@ -45,11 +59,6 @@ const genres = ["Comedy", "Thriller", "Drama", "Documentary", "Children"];
            </Link>
           </>
         })}
-      {/* <select  onChange={handleFilter}>
-        map through the filter 
-      </select> */}
-       {/* <div className = "movies-list">  */}
-        {/* map throught th movie list and display the results */}
        </div>
     </>
   );
