@@ -21,8 +21,11 @@ export const SingleMovieDetails = () => {
   <>
        <h1>SinglePage</h1>
        {data && <> <h2>{data.movie_name}</h2>
-       <img src={data.movie_url}  height={"50px"} width="50px"/>
-        <p>{data.description}</p>
+       <img src= {data.image_url}/>
+       
+             <h4> {data.release_date} </h4>
+             <h4> {data.rating} </h4>
+             <h4> {data.genre} </h4>
        </>}
   </>
   )
